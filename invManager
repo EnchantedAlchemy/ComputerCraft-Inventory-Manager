@@ -18,10 +18,10 @@ functions = {
 		if manager.getFreeSlot() ~= -1 then
 		
 			local value, value2 = manager.addItemToPlayer(takeChest, {name=desiredItem, toSlot = manager.getFreeSlot(), count = desiredQuantity})
-			if value > 0 and value2 == nil then --Correct Command
+			if value > 0 and value2 == nil then --Successful
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Command successful.", color = "green", bold = true}
+					{text = "Gave "..value.." "..desiredItem..".", color = "green", bold = true}
 				}
 				chatMessage = textutils.serializeJSON(chatMessage)
 				
@@ -38,6 +38,14 @@ functions = {
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
 					{text = "Chest does not contain item.", color = "red", bold = true}
+				}
+				chatMessage = textutils.serializeJSON(chatMessage)
+				
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+			else --Other error
+				local chatMessage = {
+					{text = "(Private) ", color = "gray", italic = true},
+					{text = "Error:".. value2, color = "red", bold = true}
 				}
 				chatMessage = textutils.serializeJSON(chatMessage)
 				
@@ -66,14 +74,38 @@ functions = {
 		
 		if desiredItem.name ~= nil then
 			local value, value2 = manager.removeItemFromPlayer(storeChest, {name=desiredItem.name, count=desiredQuantity})
-			if value2 ~= nil then --Print error if any
+			if value > 0 and value2 == nil then --Successful
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
-					{text = value2, color = "red", bold = true}
+					{text = "Stored "..value.." "..desiredItem.name..".", color = "green", bold = true}
 				}
 				chatMessage = textutils.serializeJSON(chatMessage)
 				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)	
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+			elseif value == 0 --Chest has no storage
+				local chatMessage = {
+					{text = "(Private) ", color = "gray", italic = true},
+					{text = "Chest is full.", color = "red", bold = true}
+				}
+				chatMessage = textutils.serializeJSON(chatMessage)
+				
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+			elseif value2 == "INVENTORY_TO_INVALID" --No Chest
+				local chatMessage = {
+					{text = "(Private) ", color = "gray", italic = true},
+					{text = "No chest to store items.", color = "red", bold = true}
+				}
+				chatMessage = textutils.serializeJSON(chatMessage)
+				
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+			else --Other Error
+				local chatMessage = {
+					{text = "(Private) ", color = "gray", italic = true},
+					{text = "Error:".. value2, color = "red", bold = true}
+				}
+				chatMessage = textutils.serializeJSON(chatMessage)
+				
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
 			end
 		else --No item in hand
 			local chatMessage = {
@@ -110,5 +142,3 @@ while true do
 	end
 
 end
-
-
