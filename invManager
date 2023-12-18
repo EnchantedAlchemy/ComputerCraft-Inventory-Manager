@@ -2,7 +2,7 @@ local manager = peripheral.find("inventoryManager")
 local owner = manager.getOwner()
 local chatBox = peripheral.find("chatBox")
 local chatBoxName = "Inventory Manager"
-local removeChest = "front"
+local storeChest = "front"
 local takeChest = "up"
 
 functions = {
@@ -55,8 +55,36 @@ functions = {
 		end
 	end,
 	
-	removeItem = function(commands)
-		print("t")
+	storeItem = function(commands)
+	
+		local desiredItem = manager.getItemInHand()
+		local desiredQuantity = tonumber(commands[2])
+		
+		if desiredQuantity == nil or desiredQuantity < 1 then 
+			desiredQuantity = desiredItem.count
+		end
+		
+		if desiredItem.name ~= nil then
+			local value, value2 = manager.removeItemFromPlayer(storeChest, {name=desiredItem.name, count=desiredQuantity})
+			if value2 ~= nil then --Print error if any
+				local chatMessage = {
+					{text = "(Private) ", color = "gray", italic = true},
+					{text = value2, color = "red", bold = true}
+				}
+				chatMessage = textutils.serializeJSON(chatMessage)
+				
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)	
+			end
+		else --No item in hand
+			local chatMessage = {
+				{text = "(Private) ", color = "gray", italic = true},
+				{text = "No item in hand.", color = "red", bold = true}
+			}
+			chatMessage = textutils.serializeJSON(chatMessage)
+			
+			chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)	
+		end
+		
 	end
 
 }
@@ -82,3 +110,5 @@ while true do
 	end
 
 end
+
+
