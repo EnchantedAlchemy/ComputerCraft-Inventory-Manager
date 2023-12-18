@@ -9,15 +9,15 @@ functions = {
 
 	takeItem = function(commands)
 		local desiredItem = string.lower(commands[1])
-		local desiredQuantity = commands[2]
+		local desiredQuantity = tonumber(commands[2])
 		
 		if desiredQuantity == nil or desiredQuantity < 1 then desiredQuanity = 1 end
 		
 		if manager.getFreeSlot() ~= -1 then
 		
-			local value, value2 = manager.addItemToPlayer(takeChest, {name=desiredItem, toSlot = manager.getFreeSlot(), count = tonumber(desiredQuantity)})
+			local value, value2 = manager.addItemToPlayer(takeChest, {name=desiredItem, toSlot = manager.getFreeSlot(), count = desiredQuantity})
 			print(value2)
-			if value > 0 then --Correct Command
+			if value > 0 and value2 == nil then --Correct Command
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
 					{text = "Command successful.", color = "green", bold = true}
@@ -25,10 +25,18 @@ functions = {
 				chatMessage = textutils.serializeJSON(chatMessage)
 				
 				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
-			elseif value == 0 then --Incorrect Command/No Item
+			elseif value2 == "ITEM_NOT_FOUND" then --Incorrect Command/No Item
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Improper item OR Chest does not contain item", color = "red", bold = true}
+					{text = "Improper item name (mod:item_name)", color = "red", bold = true}
+				}
+				chatMessage = textutils.serializeJSON(chatMessage)
+				
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+			elseif value2 == nil then --Incorrect Command/No Item
+				local chatMessage = {
+					{text = "(Private) ", color = "gray", italic = true},
+					{text = "Chest does not contain item.", color = "red", bold = true}
 				}
 				chatMessage = textutils.serializeJSON(chatMessage)
 				
@@ -73,5 +81,3 @@ while true do
 	end
 
 end
-
-
