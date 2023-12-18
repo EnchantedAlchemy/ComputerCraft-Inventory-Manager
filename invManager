@@ -96,19 +96,18 @@ functions = {
 		message = "\n"
 				
 		local chatMessage = {
-			{text = "\n"},
+			{text = "\n"}
 		}
 		
-		for i,v in pairs(takePeripheral.list) do
+		for i,v in pairs(takePeripheral.list()) do
+			local textColor = "white"
 			if i%2 == 1 then
-				chatMessage[#chatMessage+1] = {color = "gray"}
-			else
-				chatMessage[#chatMessage+1] = {color = "white"}
+				textColor = "gray"
 			end
-			chatMessage[#chatMessage+1] = {text = v.count.." "..v.name.."\n"}
+			chatMessage[#chatMessage+1] = {text = v.count.." "..v.name.."\n", color = textColor}
 		end
 		chatMessage = textutils.serializeJSON(chatMessage)
-		chatBox.sendFormattedMessageToPlayer(chatMessage, player, chatBoxName)
+		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
 	end
 
 }
