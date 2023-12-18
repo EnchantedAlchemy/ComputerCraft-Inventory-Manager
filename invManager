@@ -7,7 +7,7 @@ local takeChest = "up"
 
 functions = {
 
-	takeItem = function(commands)
+	take = function(commands)
 		local desiredItem = string.lower(commands[1])
 		local desiredQuantity = tonumber(commands[2])
 		
@@ -21,7 +21,7 @@ functions = {
 			if value > 0 and value2 == nil then --Successful
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Gave "..value.." "..desiredItem..".", color = "green", bold = true}
+					{text = "Took "..value.." "..desiredItem..".", color = "green", bold = true}
 				}
 				chatMessage = textutils.serializeJSON(chatMessage)
 				
@@ -63,7 +63,7 @@ functions = {
 		end
 	end,
 	
-	storeItem = function(commands)
+	store = function(commands)
 	
 		local desiredItem = manager.getItemInHand()
 		local desiredQuantity = tonumber(commands[2])
