@@ -1,0 +1,77 @@
+local manager = peripheral.find("inventoryManager")
+local owner = manager.getOwner()
+local chatBox = peripheral.find("chatBox")
+local chatBoxName = "Inventory Manager"
+local removeChest = "front"
+local takeChest = "up"
+
+functions = {
+
+	takeItem = function(commands)
+		local desiredItem = string.lower(commands[1])
+		local desiredQuantity = commands[2]
+		
+		if desiredQuantity == nil or desiredQuantity < 1 then desiredQuanity = 1 end
+		
+		if manager.getFreeSlot() ~= -1 then
+		
+			local value, value2 = manager.addItemToPlayer(takeChest, {name=desiredItem, toSlot = manager.getFreeSlot(), count = tonumber(desiredQuantity)})
+			print(value2)
+			if value > 0 then --Correct Command
+				local chatMessage = {
+					{text = "(Private) ", color = "gray", italic = true},
+					{text = "Command successful.", color = "green", bold = true}
+				}
+				chatMessage = textutils.serializeJSON(chatMessage)
+				
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+			elseif value == 0 then --Incorrect Command/No Item
+				local chatMessage = {
+					{text = "(Private) ", color = "gray", italic = true},
+					{text = "Improper item OR Chest does not contain item", color = "red", bold = true}
+				}
+				chatMessage = textutils.serializeJSON(chatMessage)
+				
+				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+			end
+			
+		else
+			local chatMessage = {
+				{text = "(Private) ", color = "gray", italic = true},
+				{text = "No empty space in inventory.", color = "red", bold = true}
+			}
+			chatMessage = textutils.serializeJSON(chatMessage)
+			
+			chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)	
+		end
+	end,
+	
+	removeItem = function(commands)
+		print("t")
+	end
+
+}
+
+while true do
+
+	local event, user, message, uuid, isHidden = os.pullEvent("chat")
+	if isHidden and user == "EnchantedAlchemy" then
+		
+		local commands = {}
+		
+		for s in string.gmatch(message, "[%w:_]+") do
+			commands[#commands+1] = s
+		end
+		
+		local mainCommand = commands[1]
+		table.remove(commands,1)
+		
+		if functions[mainCommand] ~= nil then
+			functions[mainCommand](commands)
+		end
+		
+	end
+
+end
+
+
