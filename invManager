@@ -4,7 +4,7 @@ local chatBox = peripheral.find("chatBox")
 local chatBoxName = "Inventory Manager"
 local storeName = "minecraft:chest_1"
 local storePeripheral = peripheral.wrap(storeName)
-local storeChest = "left"
+local storeChest = "right"
 local takeName = "minecraft:chest_0"
 local takePeripheral = peripheral.wrap(takeName)
 local takeChest = "up"
@@ -65,9 +65,7 @@ functions = {
 		
 		if desiredItem.name ~= nil then
 			local value, value2 = manager.removeItemFromPlayer(storeChest, {name=desiredItem.name, count=desiredQuantity})
-			for i = 1, storePeripheral.size(), 1 do
-				storePeripheral.pushItems(takeName, i)
-			end
+			storePeripheral.pushItems(takeName, 1)
 			--Successful
 			if value > 0 and value2 == nil then
 				chatFunctions.privateMessage({text = "Stored "..value.." "..desiredItem.name..".", color = "green", bold = true}, owner)
