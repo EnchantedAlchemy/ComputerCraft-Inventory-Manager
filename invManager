@@ -34,39 +34,15 @@ functions = {
 			if value > 0 and value2 == nil then --Successful
 				chatFunctions.privateMessage({text = "Took "..value.." "..desiredItem..".", color = "green", bold = true}, owner)
 			elseif value2 == "ITEM_NOT_FOUND" then --Incorrect Command
-				local chatMessage = {
-					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Improper item name (mod:item_name)", color = "red", bold = true}
-				}
-				chatMessage = textutils.serializeJSON(chatMessage)
-				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+				chatFunctions.privateMessage({text = "Improper item name (mod:item_name)", color = "red", bold = true}, owner)
 			elseif value2 == nil then --Chest does not have item
-				local chatMessage = {
-					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Chest does not contain item.", color = "red", bold = true}
-				}
-				chatMessage = textutils.serializeJSON(chatMessage)
-				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+				chatFunctions.privateMessage({text = "Chest does not contain item.", color = "red", bold = true}, owner)
 			else --Other error
-				local chatMessage = {
-					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Error:".. value2, color = "red", bold = true}
-				}
-				chatMessage = textutils.serializeJSON(chatMessage)
-				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+				chatFunctions.privateMessage({text = "Error (Show Gamer):".. value2, color = "red", bold = true}, owner)
 			end
 			
 		else
-			local chatMessage = {
-				{text = "(Private) ", color = "gray", italic = true},
-				{text = "No empty space in inventory.", color = "red", bold = true}
-			}
-			chatMessage = textutils.serializeJSON(chatMessage)
-			
-			chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)	
+			chatFunctions.privateMessage({text = "No empty space in inventory.", color = "red", bold = true}}, owner)
 		end
 	end,
 	
@@ -82,37 +58,13 @@ functions = {
 		if desiredItem.name ~= nil then
 			local value, value2 = manager.removeItemFromPlayer(storeChest, {name=desiredItem.name, count=desiredQuantity})
 			if value > 0 and value2 == nil then --Successful
-				local chatMessage = {
-					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Stored "..value.." "..desiredItem.name..".", color = "green", bold = true}
-				}
-				chatMessage = textutils.serializeJSON(chatMessage)
-				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+				chatFunctions.privateMessage({text = "Stored "..value.." "..desiredItem.name..".", color = "green", bold = true}, owner)
 			elseif value2 == "INVENTORY_TO_INVALID" then --No Chest
-				local chatMessage = {
-					{text = "(Private) ", color = "gray", italic = true},
-					{text = "No chest to store items.", color = "red", bold = true}
-				}
-				chatMessage = textutils.serializeJSON(chatMessage)
-				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+				chatFunctions.privateMessage({text = "No chest to store items.", color = "red", bold = true}, owner)
 			elseif value == 0 then --Chest has no storage
-				local chatMessage = {
-					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Chest is full.", color = "red", bold = true}
-				}
-				chatMessage = textutils.serializeJSON(chatMessage)
-				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+				chatFunctions.privateMessage({text = "Chest is full.", color = "red", bold = true}, owner)
 			else --Other Error
-				local chatMessage = {
-					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Error:".. value2, color = "red", bold = true}
-				}
-				chatMessage = textutils.serializeJSON(chatMessage)
-				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+				chatFunctions.privateMessage({text = "Error (Show Gamer):".. value2, color = "red", bold = true}, owner)
 			end
 		else --No item in hand
 			local chatMessage = {
