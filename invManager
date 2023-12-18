@@ -17,7 +17,7 @@ functions = {
 		
 		if manager.getFreeSlot() ~= -1 then
 		
-			local value, value2 = manager.addItemToPlayer(takeChest, {name=desiredItem, toSlot = manager.getFreeSlot(), count = desiredQuantity})
+			local value, value2 = manager.addItemToPlayer(takeChest, {name=desiredItem, count = desiredQuantity})
 			if value > 0 and value2 == nil then --Successful
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
