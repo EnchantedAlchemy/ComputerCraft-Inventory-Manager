@@ -100,11 +100,13 @@ functions = {
 		}
 		
 		for i,v in pairs(takePeripheral.list()) do
-			local textColor = "white"
-			if i%2 == 1 then
+			local textColor = "aqua"
+			if i%2 == 0 then
 				textColor = "gray"
 			end
-			chatMessage[#chatMessage+1] = {text = v.name.." ["..v.count.."]".."\n", color = textColor}
+			local count = v.count
+			if count < 10 then count = "0"..count end
+			chatMessage[#chatMessage+1] = {text = "["..count.."] "..v.name.."\n", color = textColor}
 		end
 		chatMessage = textutils.serializeJSON(chatMessage)
 		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
