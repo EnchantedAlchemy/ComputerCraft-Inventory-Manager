@@ -42,7 +42,7 @@ functions = {
 			end
 			
 		else
-			chatFunctions.privateMessage({text = "No empty space in inventory.", color = "red", bold = true}}, owner)
+			chatFunctions.privateMessage({text = "No empty space in inventory.", color = "red", bold = true}, owner)
 		end
 	end,
 	
