@@ -100,9 +100,9 @@ functions = {
 		}
 		
 		for i,v in pairs(takePeripheral.list()) do
-			local textColor = "aqua"
+			local textColor = "white"
 			if i%2 == 0 then
-				textColor = "gray"
+				textColor = "aqua"
 			end
 			local count = v.count
 			if count < 10 then count = "0"..count end
