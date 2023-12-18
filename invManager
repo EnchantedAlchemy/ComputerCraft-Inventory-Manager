@@ -94,8 +94,8 @@ functions = {
 
 	list = function(commands)
 		message = "\n"
-		for i,v in pairs(takeChest.list) do
-			message = message.."["..i.."] "..v[2].." "..v[1].."\n"
+		for i,v in pairs(takePeripheral.list) do
+			message = message.."["..i.."] "..v.count.." "..v.name.."\n"
 		end
 		chatFunctions.privateMessage({text = message, color = white}, owner)
 	end
