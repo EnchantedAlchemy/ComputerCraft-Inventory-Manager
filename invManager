@@ -90,7 +90,7 @@ functions = {
 			chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)	
 		end
 		
-	end
+	end,
 
 	list = function(commands)
 		message = "\n"
