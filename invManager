@@ -92,6 +92,14 @@ functions = {
 		
 	end
 
+	list = function(commands)
+		message = "\n"
+		for i,v in pairs(takeChest.list) do
+			message = message.."["..i.."] "..v[2].." "..v[1].."\n"
+		end
+		chatFunctions.privateMessage({text = message, color = white}, owner)
+	end
+
 }
 
 while true do
