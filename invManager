@@ -104,7 +104,7 @@ functions = {
 			if i%2 == 1 then
 				textColor = "gray"
 			end
-			chatMessage[#chatMessage+1] = {text = v.count.." "..v.name.."\n", color = textColor}
+			chatMessage[#chatMessage+1] = {text = v.name.." ["..v.count.."]".."\n", color = textColor}
 		end
 		chatMessage = textutils.serializeJSON(chatMessage)
 		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
