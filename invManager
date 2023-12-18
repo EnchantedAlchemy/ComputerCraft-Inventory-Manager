@@ -82,7 +82,7 @@ functions = {
 				chatMessage = textutils.serializeJSON(chatMessage)
 				
 				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
-			elseif value == 0 --Chest has no storage
+			elseif value == 0 then --Chest has no storage
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
 					{text = "Chest is full.", color = "red", bold = true}
@@ -90,7 +90,7 @@ functions = {
 				chatMessage = textutils.serializeJSON(chatMessage)
 				
 				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
-			elseif value2 == "INVENTORY_TO_INVALID" --No Chest
+			elseif value2 == then "INVENTORY_TO_INVALID" --No Chest
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
 					{text = "No chest to store items.", color = "red", bold = true}
