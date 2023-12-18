@@ -7,14 +7,14 @@ local takeChest = "up"
 
 chatFunctions = {
 
-	privateMessage = function(text, player){
+	privateMessage = function(text, player)
 		local chatMessage = {
 			{text = "(Private) ", color = "gray", italic = true},
 		}
 		chatMessage[2] = text
 		chatMessage = textutils.serializeJSON(chatMessage)
 		chatBox.sendFormattedMessageToPlayer(chatMessage, player, chatBoxName)
-	}
+	end
 
 }
 
