@@ -66,7 +66,7 @@ functions = {
 	store = function(commands)
 	
 		local desiredItem = manager.getItemInHand()
-		local desiredQuantity = tonumber(commands[2])
+		local desiredQuantity = tonumber(commands[1])
 		
 		if desiredQuantity == nil or desiredQuantity < 1 then 
 			desiredQuantity = desiredItem.count
