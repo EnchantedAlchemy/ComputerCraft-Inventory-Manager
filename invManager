@@ -5,6 +5,19 @@ local chatBoxName = "Inventory Manager"
 local storeChest = "front"
 local takeChest = "up"
 
+chatFunctions = {
+
+	privateMessage = function(text, player){
+		local chatMessage = {
+			{text = "(Private) ", color = "gray", italic = true},
+		}
+		chatMessage[2] = text
+		chatMessage = textutils.serializeJSON(chatMessage)
+		chatBox.sendFormattedMessageToPlayer(chatMessage, player, chatBoxName)
+	}
+
+}
+
 functions = {
 
 	take = function(commands)
@@ -19,13 +32,7 @@ functions = {
 		
 			local value, value2 = manager.addItemToPlayer(takeChest, {name=desiredItem, count = desiredQuantity})
 			if value > 0 and value2 == nil then --Successful
-				local chatMessage = {
-					{text = "(Private) ", color = "gray", italic = true},
-					{text = "Took "..value.." "..desiredItem..".", color = "green", bold = true}
-				}
-				chatMessage = textutils.serializeJSON(chatMessage)
-				
-				chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+				chatFunctions.privateMessage({text = "Took "..value.." "..desiredItem..".", color = "green", bold = true}, owner)
 			elseif value2 == "ITEM_NOT_FOUND" then --Incorrect Command
 				local chatMessage = {
 					{text = "(Private) ", color = "gray", italic = true},
