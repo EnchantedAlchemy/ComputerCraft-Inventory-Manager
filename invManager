@@ -7,7 +7,7 @@ local takeName = peripheral.getName(takePeripheral)
 local takeChest = "up"
 local trash = "down"
 
-print("\nType \"$help\" or \"$help (command name)\" for information."
+print("\nType \"$help\" or \"$help (command name)\" for information.")
 
 redstone.setOutput("bottom",false)
 
