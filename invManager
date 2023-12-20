@@ -5,6 +5,9 @@ local chatBoxName = "Inventory Manager"
 local takePeripheral = peripheral.find("minecraft:chest")
 local takeName = peripheral.getName(takePeripheral)
 local takeChest = "up"
+local trash = "down"
+
+redstone.setOutput("bottom",false)
 
 chatFunctions = {
 
@@ -88,6 +91,48 @@ functions = {
 		
 	end,
 
+	del = function(commands)
+	
+		local desiredItem = manager.getItemInHand()
+		local desiredQuantity = tonumber(commands[1])
+		
+		if desiredQuantity == nil or desiredQuantity < 1 then 
+			desiredQuantity = desiredItem.count
+		end
+		
+		if desiredItem.name ~= nil then
+			local value, value2 = manager.removeItemFromPlayer(trash, {name=desiredItem.name, count=desiredQuantity})
+			--Successful
+			if value > 0 and value2 == nil then
+				chatFunctions.privateMessage({text = "Deleted "..value.." "..desiredItem.name..".", color = "green", bold = true}, owner)
+				redstone.setOutput("bottom", false)
+				os.sleep(0.05)
+				redstone.setOutput("bottom", true)
+				os.sleep(0.05)
+				redstone.setOutput("bottom", false)
+			--No Chest
+			elseif value2 == "INVENTORY_TO_INVALID" then
+				chatFunctions.privateMessage({text = "No trashcan.", color = "red", bold = true}, owner)
+			--Chest has no storage
+			elseif value == 0 then
+				chatFunctions.privateMessage({text = "Trashcan is full?", color = "red", bold = true}, owner)
+			--Other Error
+			else
+				chatFunctions.privateMessage({text = "Error (Show Gamer):".. value2, color = "red", bold = true}, owner)
+			end
+		--No item in hand
+		else
+			local chatMessage = {
+				{text = "(Private) ", color = "gray", italic = true},
+				{text = "No item in hand.", color = "red", bold = true}
+			}
+			chatMessage = textutils.serializeJSON(chatMessage)
+			
+			chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)	
+		end
+		
+	end,
+	
 	list = function(commands)
 		message = "\n"
 				
