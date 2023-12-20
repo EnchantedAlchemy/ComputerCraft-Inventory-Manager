@@ -2,7 +2,7 @@ local manager = peripheral.find("inventoryManager")
 local owner = manager.getOwner()
 local chatBox = peripheral.find("chatBox")
 local chatBoxName = "Inventory Manager"
-local takeName = "minecraft:chest_3"
+local takeName = "minecraft:chest_5"
 local takePeripheral = peripheral.wrap(takeName)
 local takeChest = "up"
 
