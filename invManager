@@ -7,6 +7,8 @@ local takeName = peripheral.getName(takePeripheral)
 local takeChest = "up"
 local trash = "down"
 
+print("Type \"$help\" or \"$help (command name)\" for information."
+
 redstone.setOutput("bottom",false)
 
 chatFunctions = {
@@ -160,17 +162,17 @@ functions = {
 			argument = ""
 		end
 		
-		if string.find(argument[1], "take") then
+		if string.find(argument, "take") then
 			chatMessage = {
 				{text = "$take | ", color = "white"}, {text = "mod:item_name", color = "aqua"}, {text = " | ", color = "white"}, {text = "quantity\n", color = "yellow"},
 				{text = "Takes one (or given amount) of the given item if it is in storage.", color = "white"}
 			}
-		elseif string.find(argument[1], "store") then
+		elseif string.find(argument, "store") then
 			chatMessage = {
 				{text = "$store | ", color = "white"}, {text = "quantity\n", color = "yellow"},
 				{text = "Puts held stack (or given amount) of items in storage.", color = "white"}
 			}
-		elseif string.find(argument[1], "del") then
+		elseif string.find(argument, "del") then
 			chatMessage = {
 				{text = "$del | ", color = "white"}, {text = "quantity\n", color = "yellow"},
 				{text = "DELETES held stack (or given amount) of items.", color = "white"}
