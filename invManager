@@ -151,6 +151,43 @@ functions = {
 		end
 		chatMessage = textutils.serializeJSON(chatMessage)
 		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+	end,
+
+	help = function(commands)
+		local argument = commands[1]
+		local chatMessage = {}
+		if argument == nil then
+			argument = ""
+		end
+		
+		if string.find(argument[1], "take") then
+			chatMessage = {
+				{text = "$take | ", color = "white"}, {text = "mod:item_name", color = "aqua"}, {text = " | ", color = "white"}, {text = "quantity\n", color = "yellow"},
+				{text = "Takes one (or given amount) of the given item if it is in storage.", color = "white"}
+			}
+		elseif string.find(argument[1], "store") then
+			chatMessage = {
+				{text = "$store | ", color = "white"}, {text = "quantity\n", color = "yellow"},
+				{text = "Puts held stack (or given amount) of items in storage.", color = "white"}
+			}
+		elseif string.find(argument[1], "del") then
+			chatMessage = {
+				{text = "$del | ", color = "white"}, {text = "quantity\n", color = "yellow"},
+				{text = "DELETES held stack (or given amount) of items.", color = "white"}
+			}		
+		else --No command arg or invalid
+			chatMessage = {
+				{text = "command | ", color = "white"}, {text = "required args.", color = "aqua"}, {text = " | ", color = "white"}, {text = "optional args.\n", color = "yellow"},
+				{text = "$take | ", color = "white"}, {text = "mod:item_name", color = "aqua"}, {text = " | ", color = "white"}, {text = "quantity\n", color = "yellow"},
+				{text = "$store | ", color = "white"}, {text = "quantity\n", color = "yellow"},
+				{text = "$del | ", color = "white"}, {text = "quantity\n", color = "yellow"},
+				{text = "$help | ", color = "white"}, {text = "command name", color = "yellow"}
+			}
+		end
+		
+		chatMessage = textutils.serializeJSON(chatMessage)
+		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
+		
 	end
 
 }
