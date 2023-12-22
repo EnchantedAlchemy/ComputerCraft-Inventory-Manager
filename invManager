@@ -166,7 +166,7 @@ functions = {
 			end
 			local count = v.count
 			if count < 10 then count = "0"..count end
-			chatMessage[#chatMessage+1] = {text = "["..count.."] "..v.name.."\n", color = textColor}
+			chatMessage[#chatMessage+1] = {text = "[Slot "..i.."] "..count.." "..v.name.."\n", color = textColor}
 		end
 		chatMessage = textutils.serializeJSON(chatMessage)
 		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
@@ -182,7 +182,7 @@ functions = {
 		if string.find(argument, "take") then
 			chatMessage = {
 				{text = "$take | ", color = "white"}, {text = "mod:item_name", color = "aqua"}, {text = " | ", color = "white"}, {text = "quantity\n", color = "yellow"},
-				{text = "\nTakes one (or given amount) of the given item if it is in storage.", color = "gray"}
+				{text = "\nTakes one (or given amount) of the given item if it is in storage. Attempts to search for the nearest match to the given item name, eg. \"iron\" could find \"iron_ingot\".", color = "gray"}
 			}
 		elseif string.find(argument, "store") then
 			chatMessage = {
