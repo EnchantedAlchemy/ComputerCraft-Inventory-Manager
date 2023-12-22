@@ -46,9 +46,9 @@ functions = {
 		
 			local item = ""
 			for i,v in pairs(takePeripheral.list()) do
-				if string.find(v.name(), desiredItem) then
-					if item == "" or string.len(v.name()) < string.len(item) then
-						item = v.name()
+				if string.find(v.name, desiredItem) then
+					if item == "" or string.len(v.name) < string.len(item) then
+						item = v.name
 					end
 				end	
 			end
