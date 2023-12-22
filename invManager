@@ -27,6 +27,14 @@ chatFunctions = {
 functions = {
 
 	take = function(commands)
+	
+		--No item given
+		if commands[1] == nil or commands[1] == "" then
+			chatFunctions.privateMessage({text = "Enter an item.", color = "red", bold = true}, owner)
+			return
+		end
+	
+		--Main command
 		local desiredItem = string.lower(commands[1])
 		local desiredQuantity = tonumber(commands[2])
 		
@@ -36,10 +44,19 @@ functions = {
 		
 		if manager.getFreeSlot() ~= -1 then
 		
-			local value, value2 = manager.addItemToPlayer(takeChest, {name=desiredItem, count = desiredQuantity})
+			local item = ""
+			for i,v in pairs(takePeripheral.list()) do
+				if string.find(v.name(), desiredItem) then
+					if item == "" or string.len(v.name()) < string.len(item) then
+						item = v.name()
+					end
+				end	
+			end
+		
+			local value, value2 = manager.addItemToPlayer(takeChest, {name=item, count = desiredQuantity})
 			--Successful
 			if value > 0 and value2 == nil then
-				chatFunctions.privateMessage({text = "Took "..value.." "..desiredItem..".", color = "green", bold = true}, owner)
+				chatFunctions.privateMessage({text = "Took "..value.." "..item..".", color = "green", bold = true}, owner)
 			--Incorrect Command
 			elseif value2 == "ITEM_NOT_FOUND" then
 				chatFunctions.privateMessage({text = "Improper item name (mod:item_name)", color = "red", bold = true}, owner)
