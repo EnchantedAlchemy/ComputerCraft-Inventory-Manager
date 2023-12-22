@@ -164,9 +164,9 @@ functions = {
 			if i%2 == 0 then
 				textColor = "white"
 			end
-			local count = v.count
-			if count < 10 then count = "0"..count end
-			chatMessage[#chatMessage+1] = {text = "[Slot "..i.."] "..count.." "..v.name.."\n", color = textColor}
+			local slot = i
+			if slot < 10 then slot = "0"..slot end
+			chatMessage[#chatMessage+1] = {text = "[Slot "..slot.."] "..v.count.." "..v.name.."\n", color = textColor}
 		end
 		chatMessage = textutils.serializeJSON(chatMessage)
 		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
