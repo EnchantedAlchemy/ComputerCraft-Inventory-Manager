@@ -24,6 +24,8 @@ chatFunctions = {
 
 }
 
+chatFunctions.privateMessage({text = "Finished Loading.", color = "white", bold = true}, owner)
+
 functions = {
 
 	take = function(commands)
