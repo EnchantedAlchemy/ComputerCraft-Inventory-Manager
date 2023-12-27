@@ -24,7 +24,7 @@ chatFunctions = {
 
 }
 
-chatFunctions.privateMessage({text = "Finished Loading.", color = "white", bold = true}, owner)
+chatFunctions.privateMessage({text = "Finished Loading.", color = "aqua", bold = true}, owner)
 
 functions = {
 
