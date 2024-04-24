@@ -55,7 +55,7 @@ functions = {
 				end	
 			end
 		
-			local value, value2 = manager.addItemToPlayer(takeChest, {name=item, count = desiredQuantity})
+			local value, value2 = manager.addItemToPlayer(takeChest, desiredQuantity, nil, item)
 			--Successful
 			if value > 0 and value2 == nil then
 				chatFunctions.privateMessage({text = "Took "..value.." "..item..".", color = "green", bold = true}, owner)
@@ -73,6 +73,7 @@ functions = {
 		else
 			chatFunctions.privateMessage({text = "No empty space in inventory.", color = "red", bold = true}, owner)
 		end
+		
 	end,
 	
 	store = function(commands)
@@ -85,7 +86,7 @@ functions = {
 		end
 		
 		if desiredItem.name ~= nil then
-			local value, value2 = manager.removeItemFromPlayer(takeChest, {name=desiredItem.name, count=desiredQuantity})
+			local value, value2 = manager.removeItemFromPlayer(takeChest, desiredQuantity, nil, desiredItem.name)
 			--Successful
 			if value > 0 and value2 == nil then
 				chatFunctions.privateMessage({text = "Stored "..value.." "..desiredItem.name..".", color = "green", bold = true}, owner)
