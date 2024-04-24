@@ -123,7 +123,7 @@ functions = {
 		end
 		
 		if desiredItem.name ~= nil then
-			local value, value2 = manager.removeItemFromPlayer(trash, {name=desiredItem.name, count=desiredQuantity})
+			local value, value2 = manager.removeItemFromPlayer(trash, desiredQuantity, nil, desiredItem.name)
 			--Successful
 			if value > 0 and value2 == nil then
 				chatFunctions.privateMessage({text = "Deleted "..value.." "..desiredItem.name..".", color = "green", bold = true}, owner)
