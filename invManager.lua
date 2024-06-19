@@ -178,29 +178,6 @@ functions = {
 		end
 		chatMessage = textutils.serializeJSON(chatMessage)
 		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
-	end,
-
-	help = function(commands)
-		local argument = commands[1]
-		local chatMessage = {}
-		if argument == nil then
-			argument = ""
-		end
-		
-		
-		if string.find(argument, "inv")
-			chatMessage = {
-				{text = "command | ", color = "white"}, {text = "required args.", color = "aqua"}, {text = " | ", color = "white"}, {text = "optional args.\n", color = "yellow"},
-				{text = "$take | ", color = "white"}, {text = "mod:item_name", color = "aqua"}, {text = " | ", color = "white"}, {text = "quantity\n", color = "yellow"}, {text = "Takes one (or given amount) of the given item if it is in storage.\n", color = "gray"},
-				{text = "$store | ", color = "white"}, {text = "quantity\n", color = "yellow"}, {text = "Puts held stack (or given amount) of items in storage.\n", color = "gray"},
-				{text = "$del | ", color = "white"}, {text = "quantity\n", color = "yellow"}, {text = "DELETES held stack (or given amount) of items.\n", color = "gray"},
-				{text = "$list\n", color = "white"}, {text = "Lists all items in storage\n", color = "gray"}
-			}
-		end
-		
-		chatMessage = textutils.serializeJSON(chatMessage)
-		chatBox.sendFormattedMessageToPlayer(chatMessage, owner, chatBoxName)
-		
 	end
 
 }
