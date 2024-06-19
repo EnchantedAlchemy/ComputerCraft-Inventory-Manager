@@ -1,3 +1,8 @@
+--Requires:
+--Chatbox
+--Chest above Computer
+--Inventory Manager
+
 local manager = peripheral.find("inventoryManager")
 local owner = manager.getOwner()
 local chatBox = peripheral.find("chatBox")
