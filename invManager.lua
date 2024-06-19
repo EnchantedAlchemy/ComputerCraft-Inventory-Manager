@@ -187,34 +187,14 @@ functions = {
 			argument = ""
 		end
 		
-		if string.find(argument, "take") then
-			chatMessage = {
-				{text = "$take | ", color = "white"}, {text = "mod:item_name", color = "aqua"}, {text = " | ", color = "white"}, {text = "quantity\n", color = "yellow"},
-				{text = "\nTakes one (or given amount) of the given item if it is in storage. Attempts to search for the nearest match to the given item name, eg. \"iron\" could find \"iron_ingot\".", color = "gray"}
-			}
-		elseif string.find(argument, "store") then
-			chatMessage = {
-				{text = "$store | ", color = "white"}, {text = "quantity\n", color = "yellow"},
-				{text = "\nPuts held stack (or given amount) of items in storage.", color = "gray"}
-			}
-		elseif string.find(argument, "del") then
-			chatMessage = {
-				{text = "$del | ", color = "white"}, {text = "quantity\n", color = "yellow"},
-				{text = "\nDELETES held stack (or given amount) of items.", color = "gray"}
-			}	
-		elseif string.find(argument, "list") then
-			chatMessage = {
-				{text = "$list\n", color = "white"},
-				{text = "Lists all items in storage\n", color = "gray"},
-			}				
-		else --No command arg or invalid
+		
+		if string.find(argument, "inv")
 			chatMessage = {
 				{text = "command | ", color = "white"}, {text = "required args.", color = "aqua"}, {text = " | ", color = "white"}, {text = "optional args.\n", color = "yellow"},
 				{text = "$take | ", color = "white"}, {text = "mod:item_name", color = "aqua"}, {text = " | ", color = "white"}, {text = "quantity\n", color = "yellow"}, {text = "Takes one (or given amount) of the given item if it is in storage.\n", color = "gray"},
 				{text = "$store | ", color = "white"}, {text = "quantity\n", color = "yellow"}, {text = "Puts held stack (or given amount) of items in storage.\n", color = "gray"},
 				{text = "$del | ", color = "white"}, {text = "quantity\n", color = "yellow"}, {text = "DELETES held stack (or given amount) of items.\n", color = "gray"},
-				{text = "$list\n", color = "white"}, {text = "Lists all items in storage\n", color = "gray"},
-				{text = "$help | ", color = "white"}, {text = "command name", color = "yellow"}
+				{text = "$list\n", color = "white"}, {text = "Lists all items in storage\n", color = "gray"}
 			}
 		end
 		
