@@ -32,7 +32,9 @@ chatFunctions = {
 if pcall(function() chatFunctions.privateMessage({text = "Finished Loading.", color = "aqua", bold = true}, owner) end) then
 	--Hooray!
 else
+	term.setTextColor("gray")
 	print("Owner not online when loaded.")
+	term.setTextColor("white")
 end
 
 functions = {
