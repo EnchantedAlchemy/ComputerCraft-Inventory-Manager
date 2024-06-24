@@ -29,7 +29,11 @@ chatFunctions = {
 
 }
 
-chatFunctions.privateMessage({text = "Finished Loading.", color = "aqua", bold = true}, owner)
+if pcall(function() chatFunctions.privateMessage({text = "Finished Loading.", color = "aqua", bold = true}, owner) end) then
+	--Hooray!
+else
+	print("Owner not online when loaded.")
+end
 
 functions = {
 
