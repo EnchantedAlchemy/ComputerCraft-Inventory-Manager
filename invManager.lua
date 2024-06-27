@@ -1,7 +1,10 @@
---Requires:
+--[[
+Requires:
+********
 --Chatbox
---Chest above Computer
---Inventory Manager
+--Chest
+--Inventory Manager (AP)
+--]]
 
 local manager = peripheral.find("inventoryManager")
 local owner = manager.getOwner()
