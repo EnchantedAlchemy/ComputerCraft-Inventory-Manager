@@ -1,9 +1,9 @@
 --[[
 Requires:
 ********
---Chatbox
---Chest
---Inventory Manager (AP)
+Chatbox
+Chest
+Inventory Manager (AP)
 --]]
 
 local manager = peripheral.find("inventoryManager")
